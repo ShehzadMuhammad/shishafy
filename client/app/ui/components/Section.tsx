@@ -3,7 +3,7 @@ import React from "react";
 interface Props {
   children: React.ReactNode;
   rounded?: boolean;
-  backgroundColour?: boolean;
+  backgroundColour?: "bg-cyan-300" | "bg-red-300";
 }
 
 export const Section: React.FC<Props> = ({
@@ -12,11 +12,7 @@ export const Section: React.FC<Props> = ({
   backgroundColour = false,
 }) => {
   return (
-    <div
-      className={`${backgroundColour && "bg-cyan-300"} p-10 ${
-        rounded && "rounded-2xl"
-      }`}
-    >
+    <div className={`${backgroundColour} p-10 ${rounded && "rounded-2xl"}`}>
       {children}
     </div>
   );
