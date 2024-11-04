@@ -1,12 +1,21 @@
+import Link from "next/link";
+import { NavLink } from "@/app/ui/components/NavLink";
+import Logo from "@/app/public/shishafy-logo.svg";
+import Image from "next/image";
+import { Row } from "@/app/ui/components/Row";
+
 export const NavBar: React.FC = () => {
   return (
-    <div className="flex justify-between max-auto px-4 py-6 border-t-2 border-b-2 border-gray-800 ">
-      <div className="cursor-pointer">
-        <p className="text-lg">Shishafy</p>
-      </div>
+    <div className="flex text-lg justify-between max-auto px-4 py-6 border-t border-b border-gray-800 ">
+      <Link href="/">
+        <Row gap="gap-2">
+          <Image src={Logo} width={20} alt="Logo" />
+          Shishafy
+        </Row>
+      </Link>
       <div className="flex gap-4">
-        <p className="text-lg hover:opacity-45 cursor-pointer">Order</p>
-        <p className="text-lg hover:opacity-45 cursor-pointer">Login</p>
+        <NavLink label="Order" linkRef="/order" />
+        <NavLink label="Login" linkRef="/llogin" />
       </div>
     </div>
   );
