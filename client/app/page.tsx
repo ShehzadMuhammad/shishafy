@@ -1,4 +1,4 @@
-import { Card } from "./ui/components/Card";
+import { InfoCard } from "./ui/components/InfoCard";
 import { Column } from "./ui/components/Column";
 import { NavBar } from "./ui/components/Navbar";
 import { Section } from "./ui/components/Section";
@@ -50,26 +50,26 @@ export default function Home() {
         <Column gap="gap-2">
           <p className="text-4xl">How It Works</p>
           <Row gap="gap-4">
-            <Card
+            <InfoCard
               title="Order"
               description="Give us a call or order from our website"
               imageSrc={ComputerPhone}
               imageAlt="Computer and Phone Logo"
             />
-            <Card
+            <InfoCard
               title="Delivery"
               description="The Shisha will be delivered to your home"
               imageSrc={DeliveryCar}
               imageAlt="Delivery Car Logo"
             />
-            <Card
+            <InfoCard
               title="SetUp"
               description="We will explain how to change the coals and make sure the shisha
             flavour is to your liking before leaving"
               imageSrc={DeliveryPerson}
               imageAlt="Delivery Person Logo"
             />
-            <Card
+            <InfoCard
               title="End of Session"
               description="We come back at the agreed upon time for pickup"
               imageSrc={ComputerPhone}

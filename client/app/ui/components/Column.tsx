@@ -1,6 +1,6 @@
 interface Props {
   children: React.ReactNode;
-  gap?: "gap-2" | "gap-4" | "gap-6";
+  gap?: "gap-1" | "gap-2" | "gap-4" | "gap-6";
 }
 
 export const Column: React.FC<Props> = ({ children, gap = null }) => {
