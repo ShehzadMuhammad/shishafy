@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <Section rounded header>
         <NavBar />
-        <div className="mt-28 mb-20">
+        <div className="mt-28 mb-15">
           <Column gap="gap-2">
             <p className="text-7xl">Make Your Home The Lounge.</p>
             <p>

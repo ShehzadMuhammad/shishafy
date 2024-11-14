@@ -1,12 +1,19 @@
 interface Props {
   onClick: () => void;
   label: string;
+  sm?: boolean;
+  md?: boolean;
+  hidden?: boolean;
 }
 
-export const Button: React.FC<Props> = ({ onClick, label }) => {
+export const Button: React.FC<Props> = ({ onClick, label, sm, md, hidden }) => {
+  if (hidden) return null;
+
   return (
     <button
-      className="text-white font-bold hover:bg-slate-800 w-6  bg-slate-400 rounded-xl shadow-lg"
+      className={`text-white font-bold hover:bg-slate-800 ${sm && "px-2"} ${
+        md && "p-3"
+      } bg-sky-500 rounded-xl shadow-lg`}
       onClick={onClick}
     >
       {label}
