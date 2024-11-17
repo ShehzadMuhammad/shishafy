@@ -1,18 +1,18 @@
-import { InfoCard } from "./ui/components/InfoCard";
-import { Column } from "./ui/components/Column";
-import { NavBar } from "./ui/components/Navbar";
-import { Section } from "./ui/components/Section";
-import Logo from "@/app/public/shishafy-banner.png";
-import DeliveryCar from "@/app/public/delivery-car.svg";
 import ComputerPhone from "@/app/public/computer-phone.svg";
+import DeliveryCar from "@/app/public/delivery-car.svg";
 import DeliveryPerson from "@/app/public/delivery-person.svg";
+import Logo from "@/app/public/shishafy-banner.png";
 import Image from "next/image";
+import { Column } from "./ui/components/Column";
+import { InfoCard } from "./ui/components/InfoCard";
+import { NavBar } from "./ui/components/Navbar";
 import { Row } from "./ui/components/Row";
+import { Section } from "./ui/components/Section";
 
 export default function Home() {
   return (
     <>
-      <Section rounded header>
+      <Section isRounded isHeader>
         <NavBar />
         <div className="mt-28 mb-15">
           <Column gap="gap-2">
@@ -78,7 +78,7 @@ export default function Home() {
           </Row>
         </Column>
       </Section>
-      <Section rounded footer>
+      <Section isRounded isFooter>
         <Column>
           <p className="text-4xl">Contact Us</p>
           <p>Email: shishafy@gmail.com</p>

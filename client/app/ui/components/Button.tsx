@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 interface Props {
   onClick: () => void;
   label: string;
@@ -11,9 +13,17 @@ export const Button: React.FC<Props> = ({ onClick, label, sm, md, hidden }) => {
 
   return (
     <button
-      className={`text-white font-bold hover:bg-slate-800 ${sm && "px-2"} ${
-        md && "p-3"
-      } bg-sky-500 rounded-xl shadow-lg`}
+      className={clsx(
+        "text-white",
+        "font-bold",
+        "hover:bg-slate-800",
+        "cursor-pointer",
+        sm && "px-2",
+        md && "p-3",
+        "bg-sky-500",
+        "rounded-xl",
+        "shadow-lg"
+      )}
       onClick={onClick}
     >
       {label}

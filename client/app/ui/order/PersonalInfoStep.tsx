@@ -1,6 +1,6 @@
 import { Column } from "@/app/ui/components/Column";
-import { TextField } from "@/app/ui/components/TextField";
 import { Row } from "@/app/ui/components/Row";
+import { TextField } from "@/app/ui/components/TextField";
 
 export const PersonalInfoStep: React.FC = () => {
   return (
@@ -20,11 +20,25 @@ export const PersonalInfoStep: React.FC = () => {
       </Row>
       <Row gap="gap-2">
         <TextField
+          name="email"
+          label="Email Address"
+          placeholder="Enter Your Email Address"
+        />
+        <TextField
+          name="phone"
+          label="Phone Number"
+          placeholder="Enter Your Phone Number"
+        />
+      </Row>
+      <Row gap="gap-2">
+        <TextField
           name="Street Address"
           label="Stress Address"
           placeholder="Enter Your Street Address"
         />
         <TextField name="City" label="City" placeholder="Enter Your City" />
+      </Row>
+      <Row gap="gap-2">
         <TextField
           name="Province"
           label="Province"

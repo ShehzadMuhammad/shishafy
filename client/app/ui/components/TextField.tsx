@@ -10,12 +10,14 @@ export const TextField: React.FC<Props> = ({ label, name, placeholder }) => {
   return (
     <Column gap="gap-1">
       <label>{label}</label>
-      <input
-        type="text"
-        name={name}
-        className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-        placeholder={placeholder}
-      />
+      <div className="w-full max-w-sm min-w-[200px]">
+        <input
+          type="text"
+          name={name}
+          className="w-full bg-white-100 placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+          placeholder={placeholder}
+        />
+      </div>
     </Column>
   );
 };
