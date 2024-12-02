@@ -2,7 +2,7 @@ run_backend:
 	brew services start postgresql	
 	python3 manage.py runserver
 
-stop_sql:
+stop_psql:
 	brew services stop postgresql
 
 
@@ -21,5 +21,5 @@ test:
 pyshell:
 	python3 manage.py shell
 
-sql:
+psql:
 	python3 manage.py dbshell
