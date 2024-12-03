@@ -6,7 +6,7 @@ from django.db.models import (
     DateTimeField,
 )
 
-from .orderitem import OrderItem
+from .order_item import OrderItem
 
 
 class Order(Model):

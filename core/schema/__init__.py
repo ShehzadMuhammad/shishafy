@@ -1,8 +1,11 @@
-import graphene
+from graphene import relay, ObjectType, Schema
+from graphene_django.filter import DjangoFilterConnectionField
+from core.schema.queries import OrderItemNode
 
 
-class Query(graphene.ObjectType):
-    hello = graphene.String(default_value="Hi")
+class Query(ObjectType):
+    order_item = relay.Node.Field(OrderItemNode)
+    all_order_items = DjangoFilterConnectionField(OrderItemNode)
 
 
-schema = graphene.Schema(query=Query)
+schema = Schema(query=Query)
