@@ -1,5 +1,6 @@
 from faker import Faker
 from faker.providers import DynamicProvider
+import rstr
 
 faker = Faker()
 
@@ -14,4 +15,10 @@ generate_order_item_provider = DynamicProvider(
     ],
 )
 
+generate_postal_code_provider = DynamicProvider(
+    provider_name="postal_code",
+    elements=[rstr.xeger(r"[A-Z]\d[A-Z] \d[A-Z]\d") for _ in range(100)],
+)
+
 faker.add_provider(generate_order_item_provider)
+faker.add_provider(generate_postal_code_provider)

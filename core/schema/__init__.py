@@ -1,12 +1,14 @@
 from graphene import relay, ObjectType, Schema
 from graphene_django.filter import DjangoFilterConnectionField
-from core.schema.queries import OrderItemNode
+from core.schema.queries import OrderItemNode, OrderAddressNode
 from core.schema.queries.order_item_node import CategoryTypeEnum
 
 
 class Query(ObjectType):
     order_item = relay.Node.Field(OrderItemNode)
     all_order_items = DjangoFilterConnectionField(OrderItemNode)
+    order_address = relay.Node.Field(OrderAddressNode)
+    all_order_addresses = DjangoFilterConnectionField(OrderAddressNode)
 
 
 schema = Schema(query=Query, types=[CategoryTypeEnum])

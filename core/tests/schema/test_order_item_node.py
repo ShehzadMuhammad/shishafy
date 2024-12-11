@@ -2,7 +2,7 @@ from django.test import TestCase
 from graphene.test import Client
 from core.tests.factories import OrderItemFactory
 from graphql_relay.node.node import to_global_id
-from core.schema import schema, OrderItemNode, CategoryTypeEnum
+from core.schema import schema, OrderItemNode
 
 client = Client(schema)
 

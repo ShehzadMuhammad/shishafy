@@ -1,1 +1,2 @@
 from .order_item_factory import OrderItemFactory
+from .order_address_factory import OrderAddressFactory
