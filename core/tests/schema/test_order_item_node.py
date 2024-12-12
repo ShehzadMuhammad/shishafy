@@ -51,7 +51,7 @@ class TestOrderItemNode(TestCase):
             }
         """
 
-    def test_It_ReturnsOrderItem(self):
+    def test_It_ReturnsOrderItemById(self):
         result = client.execute(
             self.order_item_query,
             variables={"id": to_global_id(OrderItemNode, self.order_item_1.id)},

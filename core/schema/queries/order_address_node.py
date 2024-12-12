@@ -1,6 +1,6 @@
 from graphene_django import DjangoObjectType
 from core.models import OrderAddress
-from core.filterset import OrderAddressFilterSet
+from core.filtersets import OrderAddressFilterSet
 from graphene import relay
 
 

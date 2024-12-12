@@ -18,6 +18,7 @@ class Order(Model):
     order_address = ForeignKey(OrderAddress, on_delete=PROTECT)
     estimated_time_of_arrival = DateTimeField()
     customer_note = CharField(max_length=255, null=True, blank=True)
+    created_on = DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Order #{self.id} - Total: ${self.total_cost} - Address: {self.order_address.street_address}, {self.order_address.city} - ETA: {self.estimated_time_of_arrival}"
+        return f"Order #{self.id} - Created: {self.created_on} - Total: ${self.total_cost} - Address: {self.order_address.primary_street_address}, {self.order_address.city} - ETA: {self.estimated_time_of_arrival}"

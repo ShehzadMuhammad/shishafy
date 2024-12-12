@@ -1,6 +1,6 @@
 from graphene_django import DjangoObjectType
 from core.models.order_item import OrderItem, CategoryType
-from core.filterset import OrderItemFilterSet
+from core.filtersets import OrderItemFilterSet
 from graphene import Enum, relay
 
 
