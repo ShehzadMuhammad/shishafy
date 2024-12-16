@@ -9,7 +9,9 @@ client = Client(schema)
 
 class TestOrderNode(TestCase):
     def setUp(self):
-        self.order_1 = OrderFactory()
+        self.order_1 = OrderFactory(total_cost=60)
+        self.order_2 = OrderFactory(total_cost=60)
+        self.order_3 = OrderFactory(total_cost=35)
 
         self.order_query = """
             query getOrder($id: ID!){
@@ -33,7 +35,35 @@ class TestOrderNode(TestCase):
                     estimatedTimeOfArrival
                 }
             }
-"""
+        """
+
+        self.order_by_total_cost_query = """
+            query getAllOrdersGreaterThan($totalCost: Decimal){
+                allOrders(totalCost_Gt: $totalCost){
+                    edges{
+                        node {
+                          id
+                          orderAddress {
+                            id
+                            city
+                          }
+                          items{
+                            edges {
+                              node {
+                                id
+                                name
+                                cost
+                                category
+                              }
+                            }
+                          }
+                          totalCost
+                          estimatedTimeOfArrival
+                        }
+                    }
+                }
+            }
+        """
 
     def test_It_ReturnsOrderWithId(self):
         result = client.execute(
@@ -57,3 +87,10 @@ class TestOrderNode(TestCase):
             }
 
             self.assertIn(order_item_data, query_items)
+
+    def test_It_ReturnsOrdersWithTotalCostGreaterThan40(self):
+        result = client.execute(
+            self.order_by_total_cost_query, variables={"totalCost": 40}
+        )
+        data = result["data"]["allOrders"]["edges"]
+        self.assertEquals(len(data), 2)

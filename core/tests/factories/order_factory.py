@@ -12,7 +12,7 @@ class OrderFactory(DjangoModelFactory):
         model = Order
 
     order_address = SubFactory(OrderAddressFactory)
-    total_cost = LazyAttribute(lambda _: round(uniform(45.00, 45.00), 2))
+    total_cost = LazyAttribute(lambda _: round(uniform(35.00, 125.00), 2))
     estimated_time_of_arrival = LazyAttribute(lambda _: faker.date())
 
     @post_generation
