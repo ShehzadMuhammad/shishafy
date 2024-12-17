@@ -1,5 +1,6 @@
 from factory.django import DjangoModelFactory
 from core.models import Order
+from core.models.order_item import CategoryType
 from factory import LazyAttribute, SubFactory, post_generation
 from random import uniform
 from .order_address_factory import OrderAddressFactory
@@ -20,9 +21,22 @@ class OrderFactory(DjangoModelFactory):
         if not create:
             return
 
+        flavour_items = [
+            OrderItemFactory(category=CategoryType.FLAVOUR)
+            for _ in range(faker.random_int(min=1, max=3))
+        ]
+        self.items.add(*flavour_items)
+
+        if faker.boolean(chance_of_getting_true=50):
+            extra_item = OrderItemFactory(
+                name="Head",
+                category=CategoryType.EXTRA,
+                associated_flavour=OrderItemFactory.create_extra_with_flavour(
+                    flavour_items
+                ),
+            )
+            self.items.add(extra_item)
+
         if extracted:
             for item in extracted:
                 self.items.add(item)
-        else:
-            for _ in range(faker.random_int(min=1, max=3)):
-                self.items.add(OrderItemFactory())

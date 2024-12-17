@@ -31,6 +31,10 @@ class TestOrderItemNode(TestCase):
                             name
                             cost
                             category
+                            associatedFlavour {
+                                id
+                                name                        
+                            }
                         }
                     }
                 }

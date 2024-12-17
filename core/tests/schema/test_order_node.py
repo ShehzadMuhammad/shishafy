@@ -28,6 +28,10 @@ class TestOrderNode(TestCase):
                           name
                           cost
                           category
+                          associatedFlavour {
+                            id
+                            name
+                          }
                         }
                       }
                     }
@@ -84,6 +88,16 @@ class TestOrderNode(TestCase):
                 "name": order_item.name,
                 "category": order_item.category,
                 "cost": str(order_item.cost),
+                "associatedFlavour": (
+                    None
+                    if not order_item.associated_flavour
+                    else {
+                        "id": to_global_id(
+                            OrderItemNode, order_item.associated_flavour.id
+                        ),
+                        "name": order_item.associated_flavour.name,
+                    }
+                ),
             }
 
             self.assertIn(order_item_data, query_items)
