@@ -1,13 +1,17 @@
-from graphene import Mutation, String, Field
+import graphene
+from graphene.relay import ClientIDMutation
 from core.schema.queries import OrderNode
 
 
-class CreateOrder(Mutation):
-    class Arguments:
-        name = String(required=True)
+class CreateOrder(ClientIDMutation):
+    class Input:
+        items = graphene.List(graphene.ID, required=True)
+        order_address = graphene.ID(required=True)
+        expected_time_of_arrival = graphene.DateTime(required=True)
+        customer_note = graphene.String()
 
-    ok = String
+    order = graphene.Field(OrderNode)
 
-    def mutate(root, info, name):
-        print("MUTATE")
-        return CreateOrder(ok="True")
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **inputs):
+        return "HELLO"

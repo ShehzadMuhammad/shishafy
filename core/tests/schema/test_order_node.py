@@ -36,7 +36,7 @@ class TestOrderNode(TestCase):
                       }
                     }
                     totalCost
-                    estimatedTimeOfArrival
+                    expectedTimeOfArrival
                 }
             }
         """
@@ -62,7 +62,7 @@ class TestOrderNode(TestCase):
                             }
                           }
                           totalCost
-                          estimatedTimeOfArrival
+                          expectedTimeOfArrival
                         }
                     }
                 }
