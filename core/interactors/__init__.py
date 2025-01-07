@@ -1,1 +1,1 @@
-from .create_address import CreateAddressInteractor
+from .create_order_address import CreateOrderAddressInteractor

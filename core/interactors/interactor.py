@@ -7,14 +7,18 @@ class Interactor(ABC):
     class Input(ABC):
         pass
 
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
     @abstractmethod
-    def validate(self, **inputs):
+    def validate(self):
         pass
 
     @abstractmethod
-    def _execute(self, **inputs):
+    def _execute(self):
         pass
 
-    def run(self, **inputs):
-        self.validate(**inputs)
-        return self._execute(**inputs)
+    def run(self):
+        self.validate()
+        return self._execute()
