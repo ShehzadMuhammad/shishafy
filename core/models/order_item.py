@@ -17,6 +17,7 @@ class OrderItem(Model):
     name = CharField(max_length=100)
     category = CharField(max_length=20, choices=CategoryType.choices)
     cost = DecimalField(max_digits=4, decimal_places=2)
+    description = CharField(max_length=100, blank=True, null=True)
     associated_flavour = ForeignKey(
         "self",
         null=True,
@@ -30,4 +31,4 @@ class OrderItem(Model):
     def __str__(self):
         if self.category == CategoryType.EXTRA and self.associated_flavour:
             return f"Category - {self.category} - {self.name} (Flavour: {self.associated_flavour.name}) - Cost: ${self.cost}"
-        return f"Category - {self.category} - {self.name} - Cost: ${self.cost}"
+        return f"Category - {self.category} - {self.name} - {self.description} - Cost: ${self.cost}"

@@ -1,5 +1,7 @@
+import re
 from .interactor import Interactor
 from core.models import OrderAddress
+from django.core.exceptions import ValidationError
 
 
 class CreateOrderAddressInteractor(Interactor):
@@ -10,7 +12,11 @@ class CreateOrderAddressInteractor(Interactor):
         city: str
 
     def validate(self):
-        return True
+        postal_code_pattern = r"^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$"
+        if not re.match(postal_code_pattern, self.postal_code):
+            raise ValidationError(
+                "Invalid postal code format. Must be in the format 'A1A 1A1'."
+            )
 
     def _execute(self):
         return OrderAddress.objects.create(

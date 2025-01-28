@@ -5,15 +5,7 @@ from django.core.validators import RegexValidator
 class OrderAddress(Model):
     primary_street_address = CharField(max_length=100)
     secondary_street_address = CharField(max_length=50, blank=True, null=True)
-    postal_code = CharField(
-        max_length=7,
-        validators=[
-            RegexValidator(
-                regex=r"^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$",
-                message="Enter a valid postal code in the format of 'A1A '1A1'.",
-            )
-        ],
-    )
+    postal_code = CharField(max_length=7)
     city = CharField(max_length=25)
 
     def __str__(self):

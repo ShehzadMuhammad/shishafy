@@ -2,7 +2,6 @@ from django.test import TestCase
 from graphene.test import Client
 from core.schema import schema
 from core.models import OrderAddress
-from django.core.exceptions import ValidationError
 
 client = Client(schema)
 
@@ -50,7 +49,11 @@ class TestCreateOrderAddress(TestCase):
             }
         }
 
-        with self.assertRaises(ValidationError):
-            response = client.execute(
-                self.create_order_address_mutation, variables=variables
-            )
+        response = client.execute(
+            self.create_order_address_mutation, variables=variables
+        )
+
+        self.assertIn("errors", response)
+
+        error_message = response["errors"][0]["message"]
+        self.assertIn("Validation Error", error_message)
