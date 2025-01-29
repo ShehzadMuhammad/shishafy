@@ -1,8 +1,9 @@
 from django.test import TestCase
 from graphene.test import Client
-from core.tests.factories import OrderAddressFactory
 from graphql_relay.node.node import to_global_id
-from core.schema import schema, OrderAddressNode
+
+from core.schema import OrderAddressNode, schema
+from core.tests.factories import OrderAddressFactory
 
 client = Client(schema)
 
@@ -59,9 +60,9 @@ class TestOrderAddressNode(TestCase):
         )
         data = result["data"]["orderAddress"]
 
-        self.assertEquals(self.order_address_1.postal_code, data["postalCode"])
-        self.assertEquals(self.order_address_1.city, data["city"])
-        self.assertEquals(
+        self.assertEqual(self.order_address_1.postal_code, data["postalCode"])
+        self.assertEqual(self.order_address_1.city, data["city"])
+        self.assertEqual(
             self.order_address_1.primary_street_address, data["primaryStreetAddress"]
         )
 
@@ -69,7 +70,7 @@ class TestOrderAddressNode(TestCase):
         result = client.execute(self.all_order_addresses_query)
         data = result["data"]["allOrderAddresses"]["edges"]
 
-        self.assertEquals(len(data), 3)
+        self.assertEqual(len(data), 3)
         with self.subTest("Assert each postal code is in query"):
             postal_codes = [address["node"]["postalCode"] for address in data]
             self.assertIn(self.order_address_1.postal_code, postal_codes)

@@ -36,9 +36,9 @@ class TestCreateOrderAddress(TestCase):
         order_address = OrderAddress.objects.filter(city="Milton").first()
 
         with self.subTest("Newly Created Order Address has right values"):
-            self.assertEquals("453 Nairn Circle", order_address.primary_street_address)
-            self.assertEquals("L9T 8A8", order_address.postal_code)
-            self.assertEquals("Milton", order_address.city)
+            self.assertEqual("453 Nairn Circle", order_address.primary_street_address)
+            self.assertEqual("L9T 8A8", order_address.postal_code)
+            self.assertEqual("Milton", order_address.city)
 
     def test_If_IncorrectPostalCodeProvided_It_RaisesError(self):
         variables = {
