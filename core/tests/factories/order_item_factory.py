@@ -1,8 +1,11 @@
-from factory.django import DjangoModelFactory
-from core.models.order_item import OrderItem, CategoryType
-from factory import LazyAttribute, post_generation
-from .providers import faker
 from random import uniform
+
+from factory import LazyAttribute
+from factory.django import DjangoModelFactory
+
+from core.models.order_item import CategoryType, OrderItem
+
+from .providers import faker
 
 
 class OrderItemFactory(DjangoModelFactory):

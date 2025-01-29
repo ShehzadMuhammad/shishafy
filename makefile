@@ -1,13 +1,12 @@
+start_venv:
+	source venv/bin/activate && echo "Virtual environment activated"
+
 run_backend:
-	brew services start postgresql	
+	brew services start postgresql
 	python3 manage.py runserver
 
 stop_psql:
 	brew services stop postgresql
-
-
-start_venv:
-	source venv/bin/activate
 
 makemigrations:
 	python3 manage.py makemigrations core

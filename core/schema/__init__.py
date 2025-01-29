@@ -1,8 +1,9 @@
-from graphene import relay, ObjectType, Schema
+from graphene import ObjectType, Schema, relay
 from graphene_django.filter import DjangoFilterConnectionField
-from core.schema.queries import OrderItemNode, OrderAddressNode, OrderNode
+
+from core.schema.mutations import CreateOrderAddress
+from core.schema.queries import OrderAddressNode, OrderItemNode, OrderNode
 from core.schema.queries.order_item_node import CategoryTypeEnum
-from core.schema.mutations import CreateOrder, CreateOrderAddress
 
 
 class Query(ObjectType):

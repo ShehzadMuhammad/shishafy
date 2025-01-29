@@ -1,8 +1,9 @@
 from django.test import TestCase
-from core.tests.factories import OrderFactory, OrderItemFactory
 from graphene.test import Client
 from graphql_relay.node.node import to_global_id
-from core.schema import schema, OrderNode, OrderItemNode
+
+from core.schema import OrderItemNode, OrderNode, schema
+from core.tests.factories import OrderFactory
 
 client = Client(schema)
 

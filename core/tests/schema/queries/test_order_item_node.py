@@ -1,8 +1,9 @@
 from django.test import TestCase
 from graphene.test import Client
-from core.tests.factories import OrderItemFactory
 from graphql_relay.node.node import to_global_id
-from core.schema import schema, OrderItemNode
+
+from core.schema import OrderItemNode, schema
+from core.tests.factories import OrderItemFactory
 
 client = Client(schema)
 
@@ -16,7 +17,7 @@ class TestOrderItemNode(TestCase):
             query getOrderItem($id: ID!){
                     orderItem(id: $id){
                         id
-                        name 
+                        name
                         cost
                         category
                 }
@@ -33,7 +34,7 @@ class TestOrderItemNode(TestCase):
                             category
                             associatedFlavour {
                                 id
-                                name                        
+                                name
                             }
                         }
                     }
