@@ -1,7 +1,10 @@
 import re
-from .interactor import Interactor
-from core.models import OrderAddress
+
 from django.core.exceptions import ValidationError
+
+from core.models import OrderAddress
+
+from .interactor import Interactor
 
 
 class CreateOrderAddressInteractor(Interactor):
