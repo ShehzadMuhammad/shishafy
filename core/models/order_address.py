@@ -1,5 +1,4 @@
-from django.db.models import Model, CharField
-from django.core.validators import RegexValidator
+from django.db.models import CharField, Model
 
 
 class OrderAddress(Model):
@@ -9,7 +8,9 @@ class OrderAddress(Model):
     city = CharField(max_length=25)
 
     def __str__(self):
-        return f"Address: {self.primary_street_address}, {self.secondary_street_address if self.secondary_street_address else None}, {self.postal_code}, {self.city}."
+        return f"""Address: {self.primary_street_address}, 
+            {self.secondary_street_address if self.secondary_street_address else None}
+            {self.postal_code}, {self.city}."""
 
     def save(self, *args, **kwargs):
         self.full_clean()

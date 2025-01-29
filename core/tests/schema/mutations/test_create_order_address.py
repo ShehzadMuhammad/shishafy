@@ -1,7 +1,8 @@
 from django.test import TestCase
 from graphene.test import Client
-from core.schema import schema
+
 from core.models import OrderAddress
+from core.schema import schema
 
 client = Client(schema)
 
@@ -14,7 +15,6 @@ class TestCreateOrderAddress(TestCase):
                 orderAddress{
                     id
                 }
-                
             }
         }
         """

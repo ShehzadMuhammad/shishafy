@@ -1,10 +1,10 @@
 from django.db.models import (
-    Model,
+    PROTECT,
     CharField,
     DecimalField,
-    TextChoices,
     ForeignKey,
-    PROTECT,
+    Model,
+    TextChoices,
 )
 
 
@@ -30,5 +30,7 @@ class OrderItem(Model):
 
     def __str__(self):
         if self.category == CategoryType.EXTRA and self.associated_flavour:
-            return f"Category - {self.category} - {self.name} (Flavour: {self.associated_flavour.name}) - Cost: ${self.cost}"
-        return f"Category - {self.category} - {self.name} - {self.description} - Cost: ${self.cost}"
+            return f"""Category - {self.category} - {self.name}
+            (Flavour: {self.associated_flavour.name}) - Cost: ${self.cost}"""
+        return f"""Category - {self.category} - {self.name} -
+            {self.description} - Cost: ${self.cost}"""

@@ -1,15 +1,15 @@
 from django.db.models import (
-    Model,
-    CharField,
-    DecimalField,
-    ManyToManyField,
-    DateTimeField,
-    ForeignKey,
     PROTECT,
+    CharField,
+    DateTimeField,
+    DecimalField,
+    ForeignKey,
+    ManyToManyField,
+    Model,
 )
 
-from .order_item import OrderItem
 from .order_address import OrderAddress
+from .order_item import OrderItem
 
 
 class Order(Model):
@@ -21,4 +21,7 @@ class Order(Model):
     created_on = DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Order #{self.id} - Created: {self.created_on} - Total: ${self.total_cost} - Address: {self.order_address.primary_street_address}, {self.order_address.city} - ETA: {self.expected_time_of_arrival}"
+        return f"""Order #{self.id} - Created: {self.created_on}
+        - Total: ${self.total_cost}
+        - Address: {self.order_address.primary_street_address},
+        {self.order_address.city} - ETA: {self.expected_time_of_arrival}"""
