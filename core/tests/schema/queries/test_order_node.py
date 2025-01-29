@@ -76,8 +76,8 @@ class TestOrderNode(TestCase):
         )
         data = result["data"]["order"]
 
-        self.assertEquals(self.order_1.order_address.city, data["orderAddress"]["city"])
-        self.assertEquals(self.order_1.total_cost, float(data["totalCost"]))
+        self.assertEqual(self.order_1.order_address.city, data["orderAddress"]["city"])
+        self.assertEqual(self.order_1.total_cost, float(data["totalCost"]))
 
         with self.subTest("Assert each item matches"):
             query_items = [item["node"] for item in data["items"]["edges"]]
@@ -108,4 +108,4 @@ class TestOrderNode(TestCase):
             self.order_by_total_cost_query, variables={"totalCost": 40}
         )
         data = result["data"]["allOrders"]["edges"]
-        self.assertEquals(len(data), 2)
+        self.assertEqual(len(data), 2)

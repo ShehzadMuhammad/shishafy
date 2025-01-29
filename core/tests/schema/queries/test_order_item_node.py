@@ -63,14 +63,14 @@ class TestOrderItemNode(TestCase):
         )
         data = result["data"]["orderItem"]
 
-        self.assertEquals(self.order_item_1.name, data["name"])
-        self.assertEquals(self.order_item_1.cost, float(data["cost"]))
-        self.assertEquals(self.order_item_1.category, data["category"])
+        self.assertEqual(self.order_item_1.name, data["name"])
+        self.assertEqual(self.order_item_1.cost, float(data["cost"]))
+        self.assertEqual(self.order_item_1.category, data["category"])
 
     def test_It_ReturnsAllOrderItems(self):
         result = client.execute(self.all_order_items_query)
         data = result["data"]["allOrderItems"]["edges"]
-        self.assertEquals(len(data), 3)
+        self.assertEqual(len(data), 3)
 
         with self.subTest("Assert item exists is in query"):
             items = [item["node"] for item in data]
