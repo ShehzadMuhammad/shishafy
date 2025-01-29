@@ -10,7 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
+import sys
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,6 +91,16 @@ DATABASES = {
         "HOST": "localhost",
     }
 }
+
+if "test" in sys.argv:
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DB_TEST_NAME", "test_database_shishafy"),
+        "USER": os.getenv("DB_TEST_USER", "test_user"),
+        "PASSWORD": os.getenv("DB_TEST_PASSWORD", "test_password"),
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    }
 
 
 # Password validation
