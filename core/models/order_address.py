@@ -8,7 +8,7 @@ class OrderAddress(Model):
     city = CharField(max_length=25)
 
     def __str__(self):
-        return f"""Address: {self.primary_street_address}, 
+        return f"""Addressssss: {self.primary_street_address}, 
             {self.secondary_street_address if self.secondary_street_address else None}
             {self.postal_code}, {self.city}."""
 
