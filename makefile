@@ -1,6 +1,3 @@
-start_venv:
-	source venv/bin/activate && echo "Virtual environment activated"
-
 run_backend:
 	brew services start postgresql
 	python3 manage.py runserver
