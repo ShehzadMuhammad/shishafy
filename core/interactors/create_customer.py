@@ -9,7 +9,8 @@ from .interactor import Interactor
 
 class CreateCustomerInteractor(Interactor):
     class Inputs:
-        name: str
+        first_name: str
+        last_name: str
         email: str
         phone_number: str
 
@@ -32,5 +33,8 @@ class CreateCustomerInteractor(Interactor):
 
     def _execute(self):
         return Customer.objects.create(
-            name=self.name, email=self.email, phone_number=self.phone_number
+            first_name=self.first_name,
+            last_name=self.last_name,
+            email=self.email,
+            phone_number=self.phone_number,
         )
