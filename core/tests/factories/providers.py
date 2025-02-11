@@ -1,8 +1,8 @@
+import rstr
 from faker import Faker
 from faker.providers import DynamicProvider
-import rstr
 
-faker = Faker()
+faker = Faker("en_CA")
 
 generate_order_item_provider = DynamicProvider(
     provider_name="order_item",
