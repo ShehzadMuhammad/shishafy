@@ -40,7 +40,7 @@ class TestCreateOrderAddress(TestCase):
             self.assertEqual("L9T 8A8", order_address.postal_code)
             self.assertEqual("Milton", order_address.city)
 
-    def test_If_IncorrectPostalCodeProvided_It_RaisesError(self):
+    def test_It_RaisesError_When_IncorrectPostalCodeProvided(self):
         variables = {
             "input": {
                 "primaryStreetAddress": "453 Nairn Circle",
