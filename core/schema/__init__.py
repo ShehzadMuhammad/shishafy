@@ -1,7 +1,7 @@
 from graphene import ObjectType, Schema, relay
 from graphene_django.filter import DjangoFilterConnectionField
 
-from core.schema.mutations import CreateOrderAddress
+from core.schema.mutations import CreateOrderAddress, CreateCustomer
 from core.schema.queries import OrderAddressNode, OrderItemNode, OrderNode, CustomerNode
 from core.schema.queries.order_item_node import CategoryTypeEnum
 
@@ -19,6 +19,7 @@ class Query(ObjectType):
 
 class Mutation(ObjectType):
     create_order_address = CreateOrderAddress.Field()
+    create_customer = CreateCustomer.Field()
 
 
 schema = Schema(query=Query, mutation=Mutation, types=[CategoryTypeEnum])
