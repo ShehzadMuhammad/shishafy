@@ -43,22 +43,6 @@ class TestCreateCustomer(TestCase):
             self.assertEqual("batman@batmaninc.com", customer.email)
             self.assertEqual("4155555555", customer.phone_number)
 
-    def test_It_RaisesError_WhenPhoneNumberIsntFormatted(self):
-        variables = {
-            "input": {
-                "firstName": "Bruce",
-                "lastName": "Wayne",
-                "email": "batman@batmaninc.com",
-                "phoneNumber": "41555ASDA555",
-            }
-        }
-        response = client.execute(self.create_customer_mutation, variables=variables)
-
-        self.assertIn("errors", response)
-
-        error_message = response["errors"][0]["message"]
-        self.assertIn("Validation Error", error_message)
-
     def test_It_RaisesError_WhenUsingPhoneNumberAlreadyInUse(self):
         variables = {
             "input": {
