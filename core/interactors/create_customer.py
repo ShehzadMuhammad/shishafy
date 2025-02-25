@@ -14,13 +14,13 @@ class CreateCustomerInteractor(Interactor):
         email: str
         phone_number: str
 
-    def validate(self):
-        phone_number = r"^\d{10}$"
-        if not re.match(phone_number, self.phone_number):
-            raise ValidationError(
-                "Phone Number must be exactly 10 digits ie 4162341111"
-            )
+    def _clean(self):
+        self.first_name = self.first_name.strip().title()
+        self.last_name = self.last_name.strip().title()
+        self.email = self.email.lower().strip()
+        self.phone_number = re.sub(r"[^\d]", "", self.phone_number)
 
+    def _validate(self):
         if Customer.objects.filter(phone_number=self.phone_number).exists():
             raise ValidationError(
                 "This Phone Number is already in use, please try another one."
