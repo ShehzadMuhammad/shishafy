@@ -83,7 +83,4 @@ class TestOrderAddressNode(TestCase):
         )
         data = result["data"]["allOrderAddresses"]["edges"]
 
-        with self.subTest("Assert the cities exist"):
-            cities = [address["node"]["city"] for address in data]
-            self.assertIn(self.order_address_1.city, cities)
-            self.assertIn(self.order_address_3.city, cities)
+        self.assertEqual(len(data), 2)

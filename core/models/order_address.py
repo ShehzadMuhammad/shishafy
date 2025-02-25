@@ -10,8 +10,4 @@ class OrderAddress(Model):
     def __str__(self):
         return f"""Address: {self.primary_street_address}, 
             {self.secondary_street_address if self.secondary_street_address else None}
-            {self.postal_code}, {self.city}."""
-
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        super().save(*args, **kwargs)
+            {self.postal_code}, {self.city}"""

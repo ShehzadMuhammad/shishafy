@@ -14,12 +14,19 @@ class CreateOrderAddressInteractor(Interactor):
         postal_code: str
         city: str
 
-    def validate(self):
-        postal_code_pattern = r"^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$"
-        if not re.match(postal_code_pattern, self.postal_code):
-            raise ValidationError(
-                "Invalid postal code format. Must be in the format 'A1A 1A1'."
-            )
+    def _clean(self):
+        self.city = self.city.title()
+        self.postal_code = re.sub(r"[^A-Za-z0-9]", "", self.postal_code).upper()
+
+    def _validate(self):
+        if OrderAddress.objects.filter(
+            primary_street_address=self.primary_street_address
+        ).exists():
+            raise ValidationError("This Address already exists.")
+
+        if OrderAddress.objects.filter(postal_code=self.postal_code).exists():
+            print("POSTaL CODE")
+            raise ValidationError("This Postal Code already exists.")
 
     def _execute(self):
         return OrderAddress.objects.create(
