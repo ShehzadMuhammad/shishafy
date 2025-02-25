@@ -11,8 +11,12 @@ class Interactor(ABC):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
+    @classmethod
+    def _clean(self):
+        pass
+
     @abstractmethod
-    def validate(self):
+    def _validate(self):
         pass
 
     @abstractmethod
@@ -20,5 +24,6 @@ class Interactor(ABC):
         pass
 
     def run(self):
-        self.validate()
+        self._clean()
+        self._validate()
         return self._execute()
