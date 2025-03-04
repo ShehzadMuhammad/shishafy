@@ -1,8 +1,12 @@
+from random import uniform
+
+from factory import LazyAttribute, SubFactory, post_generation
 from factory.django import DjangoModelFactory
+
 from core.models import Order
 from core.models.order_item import CategoryType
-from factory import LazyAttribute, SubFactory, post_generation
-from random import uniform
+
+from .customer_factory import CustomerFactory
 from .order_address_factory import OrderAddressFactory
 from .order_item_factory import OrderItemFactory
 from .providers import faker
@@ -13,6 +17,7 @@ class OrderFactory(DjangoModelFactory):
         model = Order
 
     order_address = SubFactory(OrderAddressFactory)
+    customer = SubFactory(CustomerFactory)
     total_cost = LazyAttribute(lambda _: round(uniform(35.00, 125.00), 2))
     expected_time_of_arrival = LazyAttribute(lambda _: faker.date())
 
