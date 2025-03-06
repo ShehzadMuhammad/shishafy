@@ -1,6 +1,8 @@
 from datetime import datetime
 
+import pytz
 from django.core.exceptions import ValidationError
+from django.utils.timezone import is_aware, localtime, make_aware, now
 
 from core.models import Customer, Order, OrderAddress
 from core.models.order_item import CategoryType, OrderItem
@@ -8,7 +10,7 @@ from core.models.order_item import CategoryType, OrderItem
 from .interactor import Interactor
 
 
-class CreateOrder(Interactor):
+class CreateOrderInteractor(Interactor):
     class Inputs:
         items: list[int]
         expected_time_of_arrival: datetime
@@ -18,6 +20,13 @@ class CreateOrder(Interactor):
 
     def _clean(self):
         self.customer_note = self.customer_note.lower()
+
+        EST = pytz.timezone("America/Toronto")
+        self.expected_time_of_arrival = (
+            localtime(self.expected_time_of_arrival, timezone=EST)
+            if is_aware(self.expected_time_of_arrival)
+            else make_aware(self.expected_time_of_arrival)
+        )
 
     def _validate(self):
         self.items = [
@@ -34,6 +43,11 @@ class CreateOrder(Interactor):
                 "There isn't a valid customer attached to this order."
             )
 
+        current_time = now()
+
+        if self.expected_time_of_arrival < current_time:
+            raise ValidationError("You can't book a time in the past.")
+
     def _execute(self):
         total_cost = sum(item.cost for item in self.items)
         return Order.objects.create(
@@ -41,4 +55,6 @@ class CreateOrder(Interactor):
             total_cost=total_cost,
             order_address=self.order_address_id,
             customer=self.customer_id,
+            expected_time_of_arrival=self.expected_time_of_arrival,
+            customer_note=self.customer_note,
         )
