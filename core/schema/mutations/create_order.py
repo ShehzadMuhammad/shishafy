@@ -18,14 +18,14 @@ class CreateOrder(ClientIDMutation):
     order = graphene.Field(OrderNode)
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, **inputs):
+    def mutate_and_get_payload(cls, root, info, **input):
         try:
             order = CreateOrderInteractor(
-                itmems=input.get("items"),
-                order_address_id=input.get("order_address"),
-                customer_id=input.get("customer"),
+                items=input.get("items"),
+                order_address_id=input.get("order_address_id"),
+                customer_id=input.get("customer_id"),
                 expected_time_of_arrival=input.get("expected_time_of_arrival"),
-                customer_note=inputs.get("customer_note"),
+                customer_note=input.get("customer_note"),
             ).run()
 
         except ValidationError as e:

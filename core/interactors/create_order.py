@@ -29,9 +29,7 @@ class CreateOrderInteractor(Interactor):
         )
 
     def _validate(self):
-        self.items = [
-            OrderItem.objects.filter(id=item.id).first() for item in self.items
-        ]
+        self.items = OrderItem.objects.filter(id__in=self.items)
         if not self.items.filter(category=CategoryType.FLAVOUR).exists():
             raise ValidationError("A Flavour wasn't provided for this order")
 
@@ -50,11 +48,16 @@ class CreateOrderInteractor(Interactor):
 
     def _execute(self):
         total_cost = sum(item.cost for item in self.items)
-        return Order.objects.create(
-            items=self.items,
+        order_address = OrderAddress.objects.filter(id=self.order_address_id).first()
+        customer = Customer.objects.filter(id=self.customer_id).first()
+        order = Order.objects.create(
             total_cost=total_cost,
-            order_address=self.order_address_id,
-            customer=self.customer_id,
+            order_address=order_address,
+            customer=customer,
             expected_time_of_arrival=self.expected_time_of_arrival,
             customer_note=self.customer_note,
         )
+
+        order.items.add(*self.items)
+
+        return order
