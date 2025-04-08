@@ -2,7 +2,7 @@ from datetime import datetime
 
 import pytz
 from django.core.exceptions import ValidationError
-from django.utils.timezone import is_aware, localtime, make_aware, now
+from django.utils.timezone import is_aware, now
 
 from core.models import Customer, Order, OrderAddress
 from core.models.order_item import CategoryType, OrderItem
@@ -19,14 +19,15 @@ class CreateOrderInteractor(Interactor):
         customer_id: int
 
     def _clean(self):
-        self.customer_note = self.customer_note.lower()
+        self.customer_note = self.customer_note.lower() if self.customer_note else None
 
         EST = pytz.timezone("America/Toronto")
-        self.expected_time_of_arrival = (
-            localtime(self.expected_time_of_arrival, timezone=EST)
-            if is_aware(self.expected_time_of_arrival)
-            else make_aware(self.expected_time_of_arrival)
-        )
+        if not is_aware(self.expected_time_of_arrival):
+            self.expected_time_of_arrival = EST.localize(self.expected_time_of_arrival)
+        else:
+            self.expected_time_of_arrival = self.expected_time_of_arrival.astimezone(
+                EST
+            )
 
     def _validate(self):
         self.items = OrderItem.objects.filter(id__in=self.items)

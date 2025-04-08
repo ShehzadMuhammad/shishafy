@@ -1,5 +1,6 @@
 from random import uniform
 
+from django.utils.timezone import get_current_timezone
 from factory import LazyAttribute, SubFactory, post_generation
 from factory.django import DjangoModelFactory
 
@@ -19,7 +20,9 @@ class OrderFactory(DjangoModelFactory):
     order_address = SubFactory(OrderAddressFactory)
     customer = SubFactory(CustomerFactory)
     total_cost = LazyAttribute(lambda _: round(uniform(35.00, 125.00), 2))
-    expected_time_of_arrival = LazyAttribute(lambda _: faker.date())
+    expected_time_of_arrival = LazyAttribute(
+        lambda _: faker.date_time(tzinfo=get_current_timezone())
+    )
 
     @post_generation
     def items(self, create, extracted, **kwargs):

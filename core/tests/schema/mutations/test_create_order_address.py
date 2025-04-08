@@ -63,7 +63,6 @@ class TestCreateOrderAddress(TestCase):
         self.assertIn("Validation Error", error_message)
 
     def test_It_RaisesError_When_PostalCodeIsAlreadyInUse(self):
-        print(self.order_address.postal_code)
         variables = {
             "input": {
                 "primaryStreetAddress": "2221 Yonge Street",
