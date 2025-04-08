@@ -25,7 +25,6 @@ class CreateOrderAddressInteractor(Interactor):
             raise ValidationError("This Address already exists.")
 
         if OrderAddress.objects.filter(postal_code=self.postal_code).exists():
-            print("POSTaL CODE")
             raise ValidationError("This Postal Code already exists.")
 
     def _execute(self):
