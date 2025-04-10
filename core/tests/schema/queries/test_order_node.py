@@ -22,6 +22,12 @@ class TestOrderNode(TestCase):
                         id
                         city
                     }
+                    customer{
+                      id
+                      firstName
+                      lastName
+                      email
+                    }
                     items{
                       edges {
                         node {
@@ -52,6 +58,12 @@ class TestOrderNode(TestCase):
                             id
                             city
                           }
+                          customer{
+                            id
+                            firstName
+                            lastName
+                            email
+                          }
                           items{
                             edges {
                               node {
@@ -77,6 +89,7 @@ class TestOrderNode(TestCase):
         data = result["data"]["order"]
 
         self.assertEqual(self.order_1.order_address.city, data["orderAddress"]["city"])
+        self.assertEqual(self.order_1.customer.email, data["customer"]["email"])
         self.assertEqual(self.order_1.total_cost, float(data["totalCost"]))
 
         with self.subTest("Assert each item matches"):

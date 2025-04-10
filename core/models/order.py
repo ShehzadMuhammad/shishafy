@@ -8,6 +8,7 @@ from django.db.models import (
     Model,
 )
 
+from .customer import Customer
 from .order_address import OrderAddress
 from .order_item import OrderItem
 
@@ -16,6 +17,7 @@ class Order(Model):
     items = ManyToManyField(OrderItem, related_name="orders")
     total_cost = DecimalField(max_digits=10, decimal_places=2)
     order_address = ForeignKey(OrderAddress, on_delete=PROTECT)
+    customer = ForeignKey(Customer, on_delete=PROTECT)
     expected_time_of_arrival = DateTimeField()
     customer_note = CharField(max_length=255, null=True, blank=True)
     created_on = DateTimeField(auto_now_add=True)
