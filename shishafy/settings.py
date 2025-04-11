@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-28s&=-8ivlg764@j_k8)#&g0$fr)1tgp8@b-vc_3_s)=9+4)g6"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,21 +85,21 @@ WSGI_APPLICATION = "shishafy.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "shishafy",
-        "USER": "shehzadmuhammad",
-        "PASSWORD": "",
-        "HOST": "localhost",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
     }
 }
 
 if "test" in sys.argv:
     DATABASES["default"] = {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_TEST_NAME", "test_database_shishafy"),
-        "USER": os.getenv("DB_TEST_USER", "test_user"),
-        "PASSWORD": os.getenv("DB_TEST_PASSWORD", "test_password"),
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": os.getenv("DB_TEST_NAME"),
+        "USER": os.getenv("DB_TEST_USER"),
+        "PASSWORD": os.getenv("DB_TEST_PASSWORD"),
+        "HOST": os.getenv("DB_TEST_HOST"),
+        "PORT": os.getenv("DB_TEST_PORT"),
     }
 
 
