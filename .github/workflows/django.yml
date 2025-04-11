@@ -49,7 +49,7 @@ jobs:
           echo "DB_NAME=${{ secrets.DB_TEST_NAME }}" >> $GITHUB_ENV
           echo "DB_USER=${{ secrets.DB_TEST_USER }}" >> $GITHUB_ENV
           echo "DB_PASSWORD=${{ secrets.DB_TEST_PASSWORD }}" >> $GITHUB_ENV
-          echo "DB_HOST={{ secrets.DB_TEST_HOST }}" >> $GITHUB_ENV  # Set DB_HOST as localhost since it's in the same CI environment
+          echo "DB_HOST=${{ secrets.DB_TEST_HOST }}" >> $GITHUB_ENV  # Set DB_HOST as localhost since it's in the same CI environment
           echo "DB_PORT=${{ secrets.DB_TEST_PORT }}" >> $GITHUB_ENV
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
       - name: Run Tests
