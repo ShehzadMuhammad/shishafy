@@ -18,9 +18,9 @@ jobs:
       postgres:
         image: postgres:14
         env:
-          POSTGRES_USER: ${{ secrets.DB_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.DB_NAME }}
+          POSTGRES_USER: ${{ secrets.TEST_DB_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.TEST_DB_NAME }}
         ports:
           - 5432:5432
         options: --health-cmd="pg_isready -U postgres" --health-timeout=5s --health-start-period=5s --health-retries=5
@@ -42,6 +42,16 @@ jobs:
       - name: Check code formatting with Ruff
         run: ruff format --diff --target-version=py39
         continue-on-error: true
+
+      # Set environment variables for Django
+      - name: Set up Django environment variables
+        run: |
+          echo "DB_NAME=${{ secrets.TEST_DB_NAME }}" >> $GITHUB_ENV
+          echo "DB_USER=${{ secrets.TEST_DB_USER }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.TEST_DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_HOST={{ secrets.TEST_HOST }}" >> $GITHUB_ENV  # Set DB_HOST as localhost since it's in the same CI environment
+          echo "DB_PORT=${{ secrets.TEST_PORT }}" >> $GITHUB_ENV
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
       - name: Run Tests
         run: |
           python manage.py test
