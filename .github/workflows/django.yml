@@ -46,12 +46,22 @@ jobs:
       # Set environment variables for Django
       - name: Set up Django environment variables
         run: |
-          echo "DB_NAME=${{ secrets.DB_TEST_NAME }}" >> $GITHUB_ENV
-          echo "DB_USER=${{ secrets.DB_TEST_USER }}" >> $GITHUB_ENV
-          echo "DB_PASSWORD=${{ secrets.DB_TEST_PASSWORD }}" >> $GITHUB_ENV
-          echo "DB_HOST=${{ secrets.DB_TEST_HOST }}" >> $GITHUB_ENV  # Set DB_HOST as localhost since it's in the same CI environment
-          echo "DB_PORT=${{ secrets.DB_TEST_PORT }}" >> $GITHUB_ENV
+          echo "DB_TEST_NAME=${{ secrets.DB_TEST_NAME }}" >> $GITHUB_ENV
+          echo "DB_TEST_USER=${{ secrets.DB_TEST_USER }}" >> $GITHUB_ENV
+          echo "DB_TEST_PASSWORD=${{ secrets.DB_TEST_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_TEST_HOST=localhost" >> $GITHUB_ENV
+          echo "DB_TEST_PORT=5432" >> $GITHUB_ENV
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
+
+      - name: Print test DB env vars for debug
+        run: |
+          echo "DB_TEST_NAME=$DB_TEST_NAME"
+          echo "DB_TEST_USER=$DB_TEST_USER"
+          echo "DB_TEST_PASSWORD=$DB_TEST_PASSWORD"
+          echo "DB_TEST_HOST=$DB_TEST_HOST"
+          echo "DB_TEST_PORT=$DB_TEST_PORT"
+          echo "SECRET_KEY=$SECRET_KEY"
+
       - name: Run Tests
         run: |
           python manage.py test
