@@ -1,22 +1,27 @@
-import Link from "next/link";
-import { NavLink } from "@/app/ui/components/NavLink";
 import Logo from "@/app/public/shishafy-logo.svg";
+import { NavLink } from "@/app/ui/components/NavLink";
+import { AppBar, Box, Toolbar } from "@mui/material";
 import Image from "next/image";
-import { Row } from "@/app/ui/components/Row";
+import Link from "next/link";
 
 export const NavBar: React.FC = () => {
   return (
-    <div className="flex text-lg justify-between max-auto px-4 py-6 border-t border-b border-gray-800 ">
-      <Link href="/">
-        <Row gap="gap-2">
-          <Image src={Logo} width={20} alt="Logo" />
-          Shishafy
-        </Row>
-      </Link>
-      <div className="flex gap-4">
-        <NavLink label="Order" linkRef="/order" />
-        <NavLink label="Login" linkRef="/llogin" />
-      </div>
-    </div>
+    <Box className="flex-grow">
+      <AppBar color="transparent" position="static">
+        <Toolbar className="flex justify-between">
+          <Box display="flex" gap="12px">
+            <Link href="/">
+              <Image src={Logo} width={24} alt="Logo" />
+            </Link>
+            <NavLink label="Shishafy" linkRef="/" />
+          </Box>
+
+          <Box display="flex" gap="12px">
+            <NavLink label="Order" linkRef="/order" />
+            <NavLink label="Login" linkRef="/llogin" />
+          </Box>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 };
