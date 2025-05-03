@@ -12,8 +12,8 @@ import { Section } from "./ui/components/Section";
 export default function Home() {
   return (
     <>
+      <NavBar />
       <Section isRounded isHeader>
-        <NavBar />
         <div className="mt-28 mb-15">
           <Column gap="gap-2">
             <p className="text-7xl">Make Your Home The Lounge.</p>
