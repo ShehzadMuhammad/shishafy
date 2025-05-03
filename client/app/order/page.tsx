@@ -6,8 +6,8 @@ import { OrderPageContents } from "@/app/ui/order/OrderPageContents";
 export default function Page() {
   return (
     <Column gap="gap-2">
+      <NavBar />
       <Section>
-        <NavBar />
         <div className="mt-28 mb-15">
           <Column gap="gap-2">
             <span className="text-7xl">Start Your Experience.</span>
